@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R2 — Game Developer · AI Enthusiast</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #121210;
+            --bg-secondary: #1a1a16;
+            --bg-tertiary: #1c1c18;
+            --text-primary: #fafaf5;
+            --text-secondary: #a8a898;
+            --accent: #f59e0b;
+            --accent-dim: #f59e0b20;
+            --border: #2a2a22;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Main Container */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+        }
+
+        /* Header Section */
+        .header-section {
+            padding: 4rem 0 6rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-section h1 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-section .tagline {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border);
+            scroll-margin-top: 5rem;
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 700px;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.9;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Projects Section */
+        .project {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: border-color 0.3s;
+        }
+
+        .project:hover {
+            border-color: var(--accent-dim);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .project-title {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .project-year {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tag {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .project-summary {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .project-details h4 {
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .project-details ul {
+            list-style: none;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .project-details li {
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.25rem;
+        }
+
+        .project-details li::before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Gallery */
+        .project-gallery {
+            margin-top: 1.5rem;
+        }
+
+        .gallery-container {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+            scroll-snap-type: x mandatory;
+        }
+
+        .gallery-item {
+            flex-shrink: 0;
+            width: 280px;
+            height: 180px;
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            scroll-snap-align: start;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            border-color: var(--accent);
+            transform: scale(1.02);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+        }
+
+        /* Upload Button */
+        .upload-area {
+            flex-shrink: 0;
+            width: 120px;
+            height: 180px;
+            border: 2px dashed var(--border);
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: border-color 0.3s, background 0.3s;
+            gap: 0.5rem;
+        }
+
+        .upload-area:hover {
+            border-color: var(--accent);
+            background: var(--accent-dim);
+        }
+
+        .upload-area svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-secondary);
+        }
+
+        .upload-area span {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        .upload-input {
+            display: none;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: background 0.3s;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--accent-dim);
+        }
+
+        .lightbox-prev {
+            left: -70px;
+        }
+
+        .lightbox-next {
+            right: -70px;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category h4 {
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .skill-item.proficient {
+            border-color: var(--accent-dim);
+            color: var(--accent);
+        }
+
+        /* Experience & Education */
+        .experience-item, .education-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .experience-item h4, .education-item h4 {
+            color: var(--text-primary);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .experience-item .meta, .education-item .meta {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item p, .education-item p {
+            color: var(--text-secondary);
+        }
+
+        /* Contact Section */
+        .contact-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: opacity 0.3s;
+        }
+
+        .contact-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-section h1 {
+                font-size: 2.5rem;
+            }
+
+            nav {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .lightbox-prev {
+                left: 10px;
+            }
+
+            .lightbox-next {
+                right: 10px;
+            }
+
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo">R2</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <header class="header-section">
+            <h1>R2</h1>
+            <p class="tagline">Game Developer · AI Enthusiast</p>
+        </header>
+
+        <section id="about">
+            <h2 class="section-title">About</h2>
+            <div class="about-content">
+                <p>I'm R2, a game developer and AI enthusiast based in Australia. I've been making games since 2014, starting with self-taught projects before moving to the US in 2016 to study Computer Science.</p>
+                <p>In 2026, I founded Akarix to dedicate more time to game development and AI-powered interactive experiences. I'm particularly interested in creating meaningful connections through technology — whether through engaging gameplay or companions that feel alive.</p>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+
+            <div class="project" data-project="mari">
+                <div class="project-header">
+                    <h3 class="project-title">Mari</h3>
+                    <span class="project-year">2026 – Present</span>
+                </div>
+                <div class="project-meta">
+                    <span class="project-tag">Akarix</span>
+                    <span class="project-tag">In Development</span>
+                    <span class="project-tag">Unity</span>
+                    <span class="project-tag">AI/LLM Integration</span>
+                </div>
+                <p class="project-summary">AI-powered interactive companion with persistent memory and expressive character.</p>
+                <div class="project-details">
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li>Persistent memory system across sessions</li>
+                        <li>Expressive 3D character with dynamic animations</li>
+                        <li>Natural conversation with defined personality</li>
+                        <li>Voice interaction with real-time lip sync</li>
+                        <li>Task automation capabilities</li>
+                    </ul>
+                </div>
+                <div class="project-gallery">
+                    <div class="gallery-container">
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/mari1.gif" alt="Mari idle animation"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/mari2.gif" alt="Mari expression change"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/mari3.png" alt="Mari chat interface"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project" data-project="jacklink">
+                <div class="project-header">
+                    <h3 class="project-title">Jacklink</h3>
+                    <span class="project-year">2026</span>
+                </div>
+                <div class="project-meta">
+                    <span class="project-tag">Creator</span>
+                    <span class="project-tag">Technical Prototype</span>
+                    <span class="project-tag">AI/LLM Integration</span>
+                </div>
+                <p class="project-summary">Mobile platform for remote PC control with AI-powered code generation workflow.</p>
+                <div class="project-details">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Website Knowledge System — Stores UI element mappings per website, reducing AI vision token usage and improving efficiency</li>
+                        <li>Automated Coding Pipeline: Architect discusses design with user → generates design document; Coder reviews document → generates implementation plan → produces code after architect approval</li>
+                        <li>PC Control: Direct file system access and CMD execution from mobile</li>
+                    </ul>
+                </div>
+                <div class="project-gallery">
+                    <div class="gallery-container">
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/jack4.png" alt="Jacklink coding pipeline"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/jack3.png" alt="Jacklink web automation"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/jack1.png" alt="Jacklink file system"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/jack2.png" alt="Jacklink delete confirmation"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project" data-project="cyberhazard">
+                <div class="project-header">
+                    <h3 class="project-title">CyberHazard</h3>
+                    <span class="project-year">2021 – 2023</span>
+                </div>
+                <div class="project-meta">
+                    <span class="project-tag">Solo Developer</span>
+                    <span class="project-tag">Personal Project</span>
+                    <span class="project-tag">Unity</span>
+                    <span class="project-tag">C#</span>
+                    <span class="project-tag">DOTS</span>
+                    <span class="project-tag">Netcode</span>
+                </div>
+                <p class="project-summary">Top-down extraction shooter where players complete missions in hostile territory and evacuate.</p>
+                <div class="project-details">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Mission-based extraction gameplay</li>
+                        <li>Multiple weapon types for combat variety</li>
+                        <li>Large-scale enemy encounters with horde mechanics</li>
+                    </ul>
+                    <h4>Technical Highlights</h4>
+                    <ul>
+                        <li>Hybrid DOTS/GameObject architecture for performance</li>
+                        <li>Custom AI pathfinding system</li>
+                        <li>Texture-based animation system for DOTS compatibility</li>
+                    </ul>
+                </div>
+                <div class="project-gallery">
+                    <div class="gallery-container">
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/ch1.gif" alt="CyberHazard gameplay"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/ch3.gif" alt="CyberHazard elevator"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/ch5.gif" alt="CyberHazard combat"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/ch6.gif" alt="CyberHazard horde"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/ch8.png" alt="CyberHazard shop"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project" data-project="agents">
+                <div class="project-header">
+                    <h3 class="project-title">Agents</h3>
+                    <span class="project-year">2021</span>
+                </div>
+                <div class="project-meta">
+                    <span class="project-tag">Solo Developer</span>
+                    <span class="project-tag">Personal Project</span>
+                    <span class="project-tag">Unity</span>
+                    <span class="project-tag">C#</span>
+                    <span class="project-tag">Photon</span>
+                </div>
+                <p class="project-summary">6-player top-down multiplayer shooter with social deduction mechanics.</p>
+                <div class="project-details">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Players disguise as NPCs while hunting other players</li>
+                        <li>Weapon pickup system with various gun types</li>
+                        <li>Disguise mode with NPC behavior mimicking</li>
+                        <li>Scene-based actions for blending in</li>
+                    </ul>
+                    <h4>Skills Developed</h4>
+                    <ul>
+                        <li>Multiplayer networking with Photon</li>
+                        <li>Network traffic management and synchronization</li>
+                    </ul>
+                </div>
+                <div class="project-gallery">
+                    <div class="gallery-container">
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/agent1.png" alt="Agents NPC crowd"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/agent2.png" alt="Agents fountain area"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/agent3.png" alt="Agents map overview"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project" data-project="mobile-rpg">
+                <div class="project-header">
+                    <h3 class="project-title">2.5D Mobile RPG</h3>
+                    <span class="project-year">2019</span>
+                </div>
+                <div class="project-meta">
+                    <span class="project-tag">Solo Developer</span>
+                    <span class="project-tag">Unity</span>
+                    <span class="project-tag">C#</span>
+                </div>
+                <p class="project-summary">One-handed mobile RPG designed for accessible touch controls.</p>
+                <div class="project-details">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Inventory and equipment systems</li>
+                        <li>Touch-and-hold movement controls</li>
+                        <li>Double-tap dodge mechanic</li>
+                        <li>Auto-combat when enemies in range</li>
+                    </ul>
+                    <h4>Skills Developed</h4>
+                    <ul>
+                        <li>Mobile resource optimization for varying device performance</li>
+                        <li>Touch-based UX design</li>
+                    </ul>
+                </div>
+                <div class="project-gallery">
+                    <div class="gallery-container">
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/rpg1.gif" alt="Mobile RPG combat"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/rpg2.png" alt="Mobile RPG inventory"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/rpg3.png" alt="Mobile RPG gameplay"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project" data-project="platformer">
+                <div class="project-header">
+                    <h3 class="project-title">2.5D Platformer</h3>
+                    <span class="project-year">2018</span>
+                </div>
+                <div class="project-meta">
+                    <span class="project-tag">Solo Developer</span>
+                    <span class="project-tag">Unity</span>
+                    <span class="project-tag">C#</span>
+                </div>
+                <p class="project-summary">A comedic 2.5D platformer where players control a fragile Daikon character that shatters on impact.</p>
+                <div class="project-details">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>"Learn through death" design philosophy — 100 lives to encourage experimentation</li>
+                        <li>Key collection and level progression system</li>
+                        <li>Comedic death animations with character fragmentation</li>
+                    </ul>
+                    <h4>Skills Developed</h4>
+                    <ul>
+                        <li>Efficient scene composition</li>
+                        <li>Improved code architecture and data management</li>
+                    </ul>
+                </div>
+                <div class="project-gallery">
+                    <div class="gallery-container">
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/daikon1.png" alt="Daikon title screen"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/daikon3.png" alt="Daikon gameplay"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/daikon2.png" alt="Daikon death animation"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/daikon4.png" alt="Daikon farm"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project" data-project="2d-shooter">
+                <div class="project-header">
+                    <h3 class="project-title">2D Shooter</h3>
+                    <span class="project-year">2018</span>
+                </div>
+                <div class="project-meta">
+                    <span class="project-tag">Solo Developer</span>
+                    <span class="project-tag">Unity</span>
+                    <span class="project-tag">C#</span>
+                </div>
+                <p class="project-summary">Classic vertical scrolling shooter with power-up system and boss battles.</p>
+                <div class="project-details">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Vertical scrolling shooter mechanics</li>
+                        <li>Power-up collection system for weapon upgrades</li>
+                        <li>Boss battle at end of each level</li>
+                    </ul>
+                    <h4>Skills Developed</h4>
+                    <ul>
+                        <li>First complete playable demo in Unity</li>
+                        <li>Object management, audio integration, and scripting fundamentals</li>
+                    </ul>
+                </div>
+                <div class="project-gallery">
+                    <div class="gallery-container">
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/blitz1.png" alt="Blitz title screen"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/blitz5.png" alt="Blitz boss fight"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/blitz4.png" alt="Blitz gameplay"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/blitz3.png" alt="Blitz research menu"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/blitz2.png" alt="Blitz hangar"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>Programming</h4>
+                    <div class="skill-list">
+                        <span class="skill-item">C#</span>
+                        <span class="skill-item">C++</span>
+                        <span class="skill-item">Python</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Game Engines</h4>
+                    <div class="skill-list">
+                        <span class="skill-item">Unity</span>
+                        <span class="skill-item">Unreal Engine</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Technologies</h4>
+                    <div class="skill-list">
+                        <span class="skill-item">DOTS</span>
+                        <span class="skill-item">Photon</span>
+                        <span class="skill-item">Netcode</span>
+                        <span class="skill-item">AI/LLM Integration</span>
+                        <span class="skill-item">AWS</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-item">
+                <h4>Founder</h4>
+                <p class="meta">Akarix Pty Ltd · 2026 – Present</p>
+                <p>Digital entertainment company focused on game development and AI-powered interactive experiences.</p>
+            </div>
+        </section>
+
+        <section id="other-experience">
+            <h2 class="section-title">Other Experience</h2>
+            <div class="experience-item">
+                <h4>Director</h4>
+                <p class="meta">Top Peak Wealth Ltd · 2014 – Present</p>
+                <p>Property investment and rental company operating in Hong Kong and Australia. Responsible for investment strategy, team management, and property acquisition.</p>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2 class="section-title">Education</h2>
+            <div class="education-item">
+                <h4>Arizona State University</h4>
+                <p class="meta">B.S. Computer Science · 2024 – Present</p>
+            </div>
+            <div class="education-item">
+                <h4>Santa Monica College</h4>
+                <p class="meta">Computer Science · 2016 – 2019</p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title">Contact</h2>
+            <a href="mailto:rikorion0118@gmail.com" class="contact-link">rikorion0118@gmail.com</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 R2. All rights reserved.</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">×</button>
+            <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">‹</button>
+            <img src="" alt="Gallery image" id="lightbox-img">
+            <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">›</button>
+        </div>
+    </div>
+
+    <script>
+        let currentGallery = [];
+        let currentIndex = 0;
+
+        function openLightbox(element) {
+            const container = element.closest('.gallery-container');
+            const items = container.querySelectorAll('.gallery-item img');
+            currentGallery = Array.from(items).map(img => img.src);
+            currentIndex = Array.from(container.querySelectorAll('.gallery-item')).indexOf(element);
+            
+            document.getElementById('lightbox-img').src = currentGallery[currentIndex];
+            document.getElementById('lightbox').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        function navigateLightbox(direction) {
+            currentIndex = (currentIndex + direction + currentGallery.length) % currentGallery.length;
+            document.getElementById('lightbox-img').src = currentGallery[currentIndex];
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (document.getElementById('lightbox').style.display === 'flex') {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') navigateLightbox(-1);
+                if (e.key === 'ArrowRight') navigateLightbox(1);
+            }
+        });
+
+        // Close on background click
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
+    </script>
+</body>
+</html>
