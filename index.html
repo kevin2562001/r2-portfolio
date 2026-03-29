@@ -519,7 +519,8 @@
             <h2 class="section-title">About</h2>
             <div class="about-content">
                 <p>I'm R2, a game developer and AI enthusiast based in Australia. I've been making games since 2014, starting with self-taught projects before moving to the US in 2016 to study Computer Science.</p>
-                <p>In 2026, I founded Akarix to dedicate more time to game development and AI-powered interactive experiences. I'm particularly interested in creating meaningful connections through technology — whether through engaging gameplay or companions that feel alive.</p>
+                <p>In 2026, I founded Akarix to dedicate more time to game development and AI-powered interactive experiences. All projects so far have been solo work, though I'm open to teaming up when the right opportunity comes.</p>
+                <p>I'm particularly interested in creating meaningful connections through technology, whether through engaging gameplay or companions that feel alive.</p>
             </div>
         </section>
 
@@ -563,17 +564,16 @@
                     <span class="project-year">2026</span>
                 </div>
                 <div class="project-meta">
-                    <span class="project-tag">Creator</span>
                     <span class="project-tag">Technical Prototype</span>
                     <span class="project-tag">AI/LLM Integration</span>
                 </div>
-                <p class="project-summary">Mobile platform for remote PC control with AI-powered code generation workflow.</p>
+                <p class="project-summary">A mobile app for remote PC control with AI assistance. An AI agent can perform web tasks like online shopping and making reservations, manage files, and generate code from anywhere.</p>
                 <div class="project-details">
                     <h4>Features</h4>
                     <ul>
-                        <li>Website Knowledge System — Stores UI element mappings per website, reducing AI vision token usage and improving efficiency</li>
-                        <li>Automated Coding Pipeline: Architect discusses design with user → generates design document; Coder reviews document → generates implementation plan → produces code after architect approval</li>
-                        <li>PC Control: Direct file system access and CMD execution from mobile</li>
+                        <li>Remote PC control including file management and command execution</li>
+                        <li>AI-powered web automation that learns website layouts for efficient repeated tasks</li>
+                        <li>Multi-agent coding system where an Architect designs solutions and a Coder implements them with approval workflow</li>
                     </ul>
                 </div>
                 <div class="project-gallery">
@@ -592,25 +592,24 @@
                     <span class="project-year">2021 – 2023</span>
                 </div>
                 <div class="project-meta">
-                    <span class="project-tag">Solo Developer</span>
-                    <span class="project-tag">Personal Project</span>
                     <span class="project-tag">Unity</span>
                     <span class="project-tag">C#</span>
                     <span class="project-tag">DOTS</span>
                     <span class="project-tag">Netcode</span>
                 </div>
-                <p class="project-summary">Top-down extraction shooter where players complete missions in hostile territory and evacuate.</p>
+                <p class="project-summary">A top-down extraction shooter in a sci-fi setting. Players complete missions and escape while fighting waves of enemies. The game is designed to handle many enemies on screen without losing performance.</p>
                 <div class="project-details">
                     <h4>Features</h4>
                     <ul>
-                        <li>Mission-based extraction gameplay</li>
-                        <li>Multiple weapon types for combat variety</li>
-                        <li>Large-scale enemy encounters with horde mechanics</li>
+                        <li>Mission-based gameplay with extraction mechanics</li>
+                        <li>Different weapon types including shotguns, rifles, and melee, each with unique stats</li>
+                        <li>Large horde battles with 200+ 3D enemies on screen</li>
                     </ul>
                     <h4>Technical Highlights</h4>
                     <ul>
-                        <li>Hybrid DOTS/GameObject architecture for performance</li>
-                        <li>Custom AI pathfinding system</li>
+                        <li>Hybrid DOTS/GameObject architecture: DOTS handles enemy AI for better performance, GameObjects manage player controls</li>
+                        <li>Enemies use DOTS to run advanced behaviors: each enemy makes independent decisions and reacts to the environment in real-time, all running smoothly with 200+ 3D enemies on screen</li>
+                        <li>Custom AI pathfinding for large enemy counts</li>
                         <li>Texture-based animation system for DOTS compatibility</li>
                     </ul>
                 </div>
@@ -618,8 +617,10 @@
                     <div class="gallery-container">
                         <div class="gallery-item" onclick="openLightbox(this)"><img src="images/ch1.gif" alt="CyberHazard gameplay"></div>
                         <div class="gallery-item" onclick="openLightbox(this)"><img src="images/ch3.gif" alt="CyberHazard elevator"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/ch4.gif" alt="CyberHazard extraction"></div>
                         <div class="gallery-item" onclick="openLightbox(this)"><img src="images/ch5.gif" alt="CyberHazard combat"></div>
                         <div class="gallery-item" onclick="openLightbox(this)"><img src="images/ch6.gif" alt="CyberHazard horde"></div>
+                        <div class="gallery-item" onclick="openLightbox(this)"><img src="images/ch7.gif" alt="CyberHazard corridor"></div>
                         <div class="gallery-item" onclick="openLightbox(this)"><img src="images/ch8.png" alt="CyberHazard shop"></div>
                     </div>
                 </div>
@@ -631,25 +632,23 @@
                     <span class="project-year">2021</span>
                 </div>
                 <div class="project-meta">
-                    <span class="project-tag">Solo Developer</span>
-                    <span class="project-tag">Personal Project</span>
+                    <span class="project-tag">Prototype</span>
                     <span class="project-tag">Unity</span>
                     <span class="project-tag">C#</span>
                     <span class="project-tag">Photon</span>
                 </div>
-                <p class="project-summary">6-player top-down multiplayer shooter with social deduction mechanics.</p>
+                <p class="project-summary">A 6-player top-down multiplayer game mixing shooter and social deduction. Players hide among NPCs and must find and eliminate opponents within a time limit while staying hidden themselves.</p>
                 <div class="project-details">
                     <h4>Features</h4>
                     <ul>
-                        <li>Players disguise as NPCs while hunting other players</li>
-                        <li>Weapon pickup system with various gun types</li>
-                        <li>Disguise mode with NPC behavior mimicking</li>
-                        <li>Scene-based actions for blending in</li>
+                        <li>Disguise system: mimic NPC behaviors, perform scene actions, and change outfits to blend in</li>
+                        <li>Combat choice: use firepower to force opponents out of hiding, but NPCs will turn hostile</li>
+                        <li>Different playstyles: stay hidden and observe, or play aggressively and risk exposure</li>
                     </ul>
                     <h4>Skills Developed</h4>
                     <ul>
-                        <li>Multiplayer networking with Photon</li>
-                        <li>Network traffic management and synchronization</li>
+                        <li>First experience with multiplayer networking using Photon</li>
+                        <li>Syncing player states and actions across network</li>
                     </ul>
                 </div>
                 <div class="project-gallery">
@@ -667,18 +666,18 @@
                     <span class="project-year">2019</span>
                 </div>
                 <div class="project-meta">
-                    <span class="project-tag">Solo Developer</span>
+                    <span class="project-tag">Short Project</span>
                     <span class="project-tag">Unity</span>
                     <span class="project-tag">C#</span>
                 </div>
-                <p class="project-summary">One-handed mobile RPG designed for accessible touch controls.</p>
+                <p class="project-summary">A short project exploring how to bring RPG gameplay to phones with simple controls. Combat is mostly automatic, while players focus on dodging, managing equipment, and choosing skills.</p>
                 <div class="project-details">
                     <h4>Features</h4>
                     <ul>
-                        <li>Inventory and equipment systems</li>
-                        <li>Touch-and-hold movement controls</li>
-                        <li>Double-tap dodge mechanic</li>
-                        <li>Auto-combat when enemies in range</li>
+                        <li>Auto-combat system with manual dodge control</li>
+                        <li>Basic RPG elements: weapons, potions, and skills</li>
+                        <li>Equipment and skill management between battles</li>
+                        <li>One-handed touch controls for mobile play</li>
                     </ul>
                     <h4>Skills Developed</h4>
                     <ul>
@@ -697,21 +696,21 @@
 
             <div class="project" data-project="platformer">
                 <div class="project-header">
-                    <h3 class="project-title">2.5D Platformer</h3>
+                    <h3 class="project-title">Daikon</h3>
                     <span class="project-year">2018</span>
                 </div>
                 <div class="project-meta">
-                    <span class="project-tag">Solo Developer</span>
+                    <span class="project-tag">Short Project</span>
                     <span class="project-tag">Unity</span>
                     <span class="project-tag">C#</span>
                 </div>
-                <p class="project-summary">A comedic 2.5D platformer where players control a fragile Daikon character that shatters on impact.</p>
+                <p class="project-summary">A short project making a comedic auto-runner game. Each level is filled with traps and hazards, and players must time their jumps to survive.</p>
                 <div class="project-details">
                     <h4>Features</h4>
                     <ul>
-                        <li>"Learn through death" design philosophy — 100 lives to encourage experimentation</li>
-                        <li>Key collection and level progression system</li>
-                        <li>Comedic death animations with character fragmentation</li>
+                        <li>Auto-runner gameplay with one-button jump control</li>
+                        <li>Levels designed with many death traps for trial-and-error fun</li>
+                        <li>Comedic Daikon character that shatters on impact</li>
                     </ul>
                     <h4>Skills Developed</h4>
                     <ul>
@@ -731,26 +730,26 @@
 
             <div class="project" data-project="2d-shooter">
                 <div class="project-header">
-                    <h3 class="project-title">2D Shooter</h3>
+                    <h3 class="project-title">Blitz</h3>
                     <span class="project-year">2018</span>
                 </div>
                 <div class="project-meta">
-                    <span class="project-tag">Solo Developer</span>
+                    <span class="project-tag">Short Project</span>
                     <span class="project-tag">Unity</span>
                     <span class="project-tag">C#</span>
                 </div>
-                <p class="project-summary">Classic vertical scrolling shooter with power-up system and boss battles.</p>
+                <p class="project-summary">My first complete playable project, built to learn the fundamentals of Unity. A vertical scrolling shooter where players upgrade weapons and fight through waves of enemies.</p>
                 <div class="project-details">
                     <h4>Features</h4>
                     <ul>
-                        <li>Vertical scrolling shooter mechanics</li>
-                        <li>Power-up collection system for weapon upgrades</li>
-                        <li>Boss battle at end of each level</li>
+                        <li>3 playable ships to choose from</li>
+                        <li>Weapon upgrade system that changes shooting patterns</li>
+                        <li>Boss battles at the end of each level</li>
                     </ul>
                     <h4>Skills Developed</h4>
                     <ul>
-                        <li>First complete playable demo in Unity</li>
-                        <li>Object management, audio integration, and scripting fundamentals</li>
+                        <li>First complete project in Unity</li>
+                        <li>Learned core Unity tools including object management, audio integration, and scripting</li>
                     </ul>
                 </div>
                 <div class="project-gallery">
